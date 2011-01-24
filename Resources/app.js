@@ -1,38 +1,53 @@
-Ti.include('view/TableForm.js');
 Ti.include('view/TabView.js');
 Ti.UI.setBackgroundColor('#eee');
 
 (function() {
 	function Application(){
-		var userName = Ti.App.Properties.getString('userName',''),
-			password = Ti.App.Properties.getString('password',''),
+			var password = Ti.App.Properties.getString('password',''),
 			isRequiredLogin = Ti.App.Properties.getBool('requireLogin',false),
 			tabView,
-			loginView,
-			opts = {
-				login: true,
-				headerText: "Enter your username and password"
-			};
-		Ti.API.info(userName + " " +password);
+			loginView;
 		if(!isRequiredLogin){
 			tabView = new PasswordStore.TabView();
 			tabView.tabGroup.open();
 		}
 		else{
 			loginView = Ti.UI.createWindow();
-			var tableForm = new PasswordStore.TableForm(opts);
-			loginView.add(tableForm.tableview);
-			var oLoginButton = Titanium.UI.createButton({
+			var passwordLabel = Ti.UI.createLabel({
+				text: 'Master Password',
+				color: '#000000',
+				textAlign:'left',
+				top: 100,
+				left:10,
+				width: 120,
+				height:40,
+				font:{fontWeight:'bold',fontSize:16}
+			}),
+			passwordTextField = Titanium.UI.createTextField({
+				color: '#666666',
+				textAlign:'left',
+				left:110,
+				width:170,
+				top: 100,
+				height: 30,
+				font:{fontWeight:'plain',fontSize:14},
+				autocorrect:false,
+				passwordMask:true,
+				borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+				keyboardType: Titanium.UI.KEYBOARD_ASCII,
+				autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE
+			}),
+			oLoginButton = Titanium.UI.createButton({
 				title:'Login',
 				height:40,
-				width:200,
-				top:160,
+				width:100,
+				top:150,
 				color: "#13386c"
 			});
 			oLoginButton.addEventListener('click', function(){
-				var userEntered = tableForm.userNameTextField.value,
-					passwordEntered = tableForm.passwordTextField.value;
-				if(userEntered === userName && passwordEntered === password){
+				var passwordEntered = passwordTextField.value;
+					
+				if(passwordEntered === password){
 					tabView = new PasswordStore.TabView();
 					tabView.tabGroup.open();
 				}
@@ -41,6 +56,8 @@ Ti.UI.setBackgroundColor('#eee');
 				}
 				
 			});
+			loginView.add(passwordLabel);
+			loginView.add(passwordTextField);
 			loginView.add(oLoginButton);
 			loginView.open();
 		}

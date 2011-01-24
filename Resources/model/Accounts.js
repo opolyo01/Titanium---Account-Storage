@@ -1,3 +1,4 @@
+var PasswordStore = {};
 (function() {
 	function Accounts(){
 		this.db = Titanium.Database.open('password-store');
