@@ -38,7 +38,6 @@ var win = Ti.UI.currentWindow,
 	
 	checkPasswordSwitch.addEventListener('change',function(e)
 	{
-		Ti.API.info(checkPasswordSwitch.value);
 		Ti.App.Properties.setBool("requireLogin", checkPasswordSwitch.value);
 	});
 
