@@ -1,11 +1,7 @@
 var PasswordStore = {};
 PasswordStore.UpdateView = function(opts){
 	this.view = Titanium.UI.createView({
-	   borderRadius:10,
-	   width:280,
-	   height:250,
-	   top: 20,
-	   backgroundColor:'#C4CBD3'
+	   backgroundColor:'#fff'
 	});
 	var accountLabel = Titanium.UI.createLabel({
 		text:'Account Name',
@@ -13,8 +9,8 @@ PasswordStore.UpdateView = function(opts){
 		top:10,
 		left: 10,
 		width:100,
-		color:'#900',
-		font:{fontSize:12, fontStyle:'italic'},
+		color:'000',
+		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.accountTextField = Titanium.UI.createTextField({
@@ -33,8 +29,8 @@ PasswordStore.UpdateView = function(opts){
 		top:50,
 		left: 10,
 		width:100,
-		color:'#900',
-		font:{fontSize:12, fontStyle:'italic'},
+		color:'#000',
+		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.userTextField = Titanium.UI.createTextField({
@@ -53,8 +49,8 @@ PasswordStore.UpdateView = function(opts){
 		top:90,
 		left: 10,
 		width:100,
-		color:'#900',
-		font:{fontSize:12, fontStyle:'italic'},
+		color:'#000',
+		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.passwordField = Titanium.UI.createTextField({
@@ -73,8 +69,8 @@ PasswordStore.UpdateView = function(opts){
 		top:130,
 		left: 10,
 		width:100,
-		color:'#900',
-		font:{fontSize:12, fontStyle:'italic'},
+		color:'#000',
+		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.categoryTextField = Titanium.UI.createTextField({
@@ -90,16 +86,49 @@ PasswordStore.UpdateView = function(opts){
 	this.updateButton = Titanium.UI.createButton({
 		width: 100,
 		height: 30,
-		top: 190,
+		top: 280,
 		left: 20,
 		title:opts.positiveButton || "Save"
 	});
 	this.cancelButton = Titanium.UI.createButton({
 		width: 100,
 		height: 30,
-		top: 190,
+		top: 280,
 		left:140,
 		title:"Cancel"
+	});
+	var notesLabel = Titanium.UI.createLabel({
+		text:'Notes',
+		height:30,
+		top:200,
+		left: 10,
+		width:100,
+		color:'#000',
+		font:{fontSize:12, fontWeight:'bold'},
+		textAlign:'center'
+	});
+	this.notes = Titanium.UI.createTextArea({
+		value:'',
+		height:100,
+		width:190,
+		top: 170,
+		left: 120,
+		font:{fontSize:12},
+		color:'#000',
+		textAlign:'left',
+		borderWidth:2,
+		borderColor:'#bbb',
+		borderRadius:5
+	});
+	var that = this;
+	this.notes.addEventListener('focus', function() {
+		that.view.top = -120;
+	    that.view.animate({bottom: 166, duration:500});
+	});
+	 
+	this.notes.addEventListener('blur', function() {
+		that.view.top = 0;
+	    that.view.animate({bottom: 0, duration:500});
 	});
 	this.view.add(accountLabel);
 	this.view.add(this.accountTextField);
@@ -109,6 +138,8 @@ PasswordStore.UpdateView = function(opts){
 	this.view.add(this.passwordField);
 	this.view.add(categoryLabel);
 	this.view.add(this.categoryTextField);
+	this.view.add(notesLabel);
+	this.view.add(this.notes);
 	this.view.add(this.updateButton);
 	this.view.add(this.cancelButton);
 };

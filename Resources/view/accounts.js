@@ -140,6 +140,8 @@ addButton.addEventListener('click', function(e)
 });
 
 function showUpadateWindow(opts){
+	win.setLeftNavButton(null);
+	win.setRightNavButton(null);
 	var updateView = new PasswordStore.UpdateView(opts);
 	updateView.updateButton.addEventListener('click', function(){
 		var accountValue = updateView.accountTextField.value,
@@ -165,13 +167,18 @@ function showUpadateWindow(opts){
 			});
 			reload();
 		}
+		displayNavButtons();
 		updateView.view.hide();
 	});
 	updateView.cancelButton.addEventListener('click', function(){
+		displayNavButtons();
 		updateView.view.hide();
 	});
 	win.add(updateView.view);
 }
 
-win.setLeftNavButton(addButton);
-win.setRightNavButton(edit);
+displayNavButtons();
+function displayNavButtons(){
+	win.setLeftNavButton(addButton);
+	win.setRightNavButton(edit);
+}

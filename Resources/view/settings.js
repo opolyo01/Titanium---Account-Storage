@@ -49,7 +49,7 @@ var win = Ti.UI.currentWindow,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 		keyboardType: Titanium.UI.KEYBOARD_ASCII,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE
-	});
+	}),
 	oUpdateButton = Titanium.UI.createButton({
 		title:'Update Master Password',
 		height:40,
