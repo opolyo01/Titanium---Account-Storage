@@ -1,7 +1,15 @@
+Ti.include('ComboBox.js');
 var PasswordStore = {};
 PasswordStore.UpdateView = function(opts){
 	this.view = Titanium.UI.createView({
 	   backgroundColor:'#fff'
+	});
+	var oComboCategoryTextField = new ComboBox({
+		value:opts.categoryValue || "",
+		top:130,
+		left:120,
+		width:150,
+		height: 30
 	});
 	var accountLabel = Titanium.UI.createLabel({
 		text:'Account Name',
@@ -73,16 +81,17 @@ PasswordStore.UpdateView = function(opts){
 		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
-	this.categoryTextField = Titanium.UI.createTextField({
-		value:opts.categoryValue || "",
-		top:130,
-		left:120,
-		width:150,
-		height: 30,
-		font:{fontSize:12},
-		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
-		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
-	});
+	this.categoryTextField = oComboCategoryTextField.comboTextField;
+//	this.categoryTextField = Titanium.UI.createTextField({
+//		value:opts.categoryValue || "",
+//		top:130,
+//		left:120,
+//		width:150,
+//		height: 30,
+//		font:{fontSize:12},
+//		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
+//		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+//	});
 	this.updateButton = Titanium.UI.createButton({
 		width: 100,
 		height: 30,
@@ -108,7 +117,7 @@ PasswordStore.UpdateView = function(opts){
 		textAlign:'center'
 	});
 	this.notes = Titanium.UI.createTextArea({
-		value:'',
+		value:opts.notesValue || "",
 		height:100,
 		width:190,
 		top: 170,
@@ -138,6 +147,7 @@ PasswordStore.UpdateView = function(opts){
 	this.view.add(this.passwordField);
 	this.view.add(categoryLabel);
 	this.view.add(this.categoryTextField);
+	this.view.add(oComboCategoryTextField.picker_view);
 	this.view.add(notesLabel);
 	this.view.add(this.notes);
 	this.view.add(this.updateButton);

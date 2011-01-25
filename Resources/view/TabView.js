@@ -1,6 +1,7 @@
 Ti.include('model/Accounts.js');
 PasswordStore.TabView = function(){
 	var accounts = new PasswordStore.Accounts();
+	//accounts.dropTable();
 	this.tabGroup = Ti.UI.createTabGroup();
 
 	var oHome = Ti.UI.createWindow({  
@@ -23,17 +24,17 @@ PasswordStore.TabView = function(){
 	});
 
 	var oHomeTab = Ti.UI.createTab({  
-	    icon:'home.png',
+	    icon:'images/home.png',
 	    title:'Accounts',
 	    window:oHome
 	}),
 	oToolsTab = Ti.UI.createTab({  
-	    icon:'tools.png',
+	    icon:'images/tools.png',
 	    title:'Tools',
 	    window:oTools
 	}),
 	oSettingsTab = Ti.UI.createTab({  
-	    icon:'settings.png',
+	    icon:'images/settings.png',
 	    title:'Settings',
 	    window:oSettings
 	});

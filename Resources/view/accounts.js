@@ -1,8 +1,17 @@
 Ti.include('UpdateView.js');
-
 var win = Titanium.UI.currentWindow,
 	tableView,
 	data = [],
+	imgMap = {
+		'Credit Card': 'credit-card.png',
+		'Social Networking': 'group.png',
+		'Shopping': 'shopping.png',
+		'Work': 'work.png',
+		'Healthcare': 'health.png',
+		'Computer': 'computer.png',
+		'Phone': 'phone.png',
+		'Others': 'others.png'
+	},
 	accountsVO = win.accounts;
 
 var search = Titanium.UI.createSearchBar({
@@ -42,6 +51,7 @@ function reload(){
 		row = Ti.UI.createTableViewRow();
 		var curAccount = accountsList[i],
 			accountName = curAccount.accountName,
+			curCategoryName = curAccount.categoryName,
 			newAccountNameFirstChar = accountName[0].toUpperCase(),
 			config = {
 				text: accountName, 
@@ -52,16 +62,15 @@ function reload(){
 			};
 		var accountLabel = Titanium.UI.createLabel(config);
 		var photo = Ti.UI.createView({
-			backgroundImage:'../images/user.png',
+			backgroundImage:'../images/categories/'+imgMap[curCategoryName],
 			top:5,
 			left:10,
-			width:50,
-			height:40,
+			width:30,
+			height:20,
 			clickName:'photo'
 		});
 		row.hasChild = true;
 		if(currentAccountNameFirstChar !== newAccountNameFirstChar){
-			k++;
 			index.push({title:newAccountNameFirstChar,index:i});
 			currentAccountNameFirstChar = newAccountNameFirstChar;
 			row.header = newAccountNameFirstChar;
@@ -72,10 +81,11 @@ function reload(){
 		}
 		//row.filterAttribute = 'title';
 		row.accountValue = accountName;
-		row.categoryValue = curAccount.categoryName;
+		row.categoryValue = curCategoryName;
 		row.id = curAccount.id;
 		row.userName = curAccount.userName;
 		row.password = curAccount.password;
+		row.notes = curAccount.notes;
 		row.filter = accountLabel.text + ' ' + row.categoryValue;
 		row.add(photo);
 		row.add(accountLabel);
@@ -93,6 +103,7 @@ tableview.addEventListener('click', function(e)
 		categoryValue: rowData.categoryValue,
 		userValue: rowData.userName,
 		passwordValue: rowData.password,
+		notesValue: rowData.notes,
 		positiveButton: "Update",
 		id: rowData.id
 	});
@@ -135,6 +146,7 @@ addButton.addEventListener('click', function(e)
 		categoryValue: "Others",
 		userValue: "",
 		passwordValue: "",
+		notesValue: "",
 		positiveButton: "Save"
 	});
 });
@@ -147,13 +159,15 @@ function showUpadateWindow(opts){
 		var accountValue = updateView.accountTextField.value,
 				categoryValue = updateView.categoryTextField.value,
 				userValue = updateView.userTextField.value,
-				passwordValue = updateView.passwordField.value;
+				passwordValue = updateView.passwordField.value,
+				notesValue = updateView.notes.value;
 		if(opts.positiveButton === "Save"){
 			accountsVO.insertAccount({
 				accountName: accountValue,
 				categoryName: categoryValue,
 				userName: userValue,
-				password: passwordValue
+				password: passwordValue,
+				notes: notesValue
 			});
 			reload();
 		}
@@ -163,6 +177,7 @@ function showUpadateWindow(opts){
 				categoryName: categoryValue,
 				userName: userValue,
 				password: passwordValue,
+				notes: notesValue,
 				id: opts.id
 			});
 			reload();

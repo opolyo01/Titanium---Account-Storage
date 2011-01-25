@@ -2,7 +2,7 @@ var PasswordStore = {};
 (function() {
 	function Accounts(){
 		this.db = Titanium.Database.open('password-store');
-		this.db.execute('CREATE TABLE IF NOT EXISTS ACCOUNTS  (ID INTEGER PRIMARY KEY AUTOINCREMENT, ACCONT_NAME TEXT, CATEGORY TEXT, USER_NAME TEXT, PASSWORD TEXT)');
+		this.db.execute('CREATE TABLE IF NOT EXISTS ACCOUNTS  (ID INTEGER PRIMARY KEY AUTOINCREMENT, ACCONT_NAME TEXT, CATEGORY TEXT, USER_NAME TEXT, PASSWORD TEXT, NOTES TEXT)');
 	}
 	
 	Accounts.prototype.getAccounts = function(id){
@@ -14,13 +14,15 @@ var PasswordStore = {};
 				categoryName = rows.fieldByName("CATEGORY"),
 				id = rows.fieldByName('ID'),
 				userName = rows.fieldByName('USER_NAME'),
-				password = rows.fieldByName('PASSWORD');
+				password = rows.fieldByName('PASSWORD'),
+				notes = rows.fieldByName('NOTES');
 			accounts.push({
 				id: id,
 				categoryName: categoryName,
 				accountName: accountName,
 				userName: userName,
-				password: password
+				password: password,
+				notes: notes
 			});
 			rows.next();
 		}
@@ -28,9 +30,9 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.insertAccount = function(opts){
-		this.db.execute('INSERT INTO ACCOUNTS (ACCONT_NAME, CATEGORY, USER_NAME, PASSWORD) VALUES(?,?,?,?)', 
+		this.db.execute('INSERT INTO ACCOUNTS (ACCONT_NAME, CATEGORY, USER_NAME, PASSWORD, NOTES) VALUES(?,?,?,?,?)', 
 			opts.accountName?opts.accountName:"", opts.categoryName?opts.categoryName:"Others", 
-			opts.userName?opts.userName:"", opts.password?opts.password:"");
+			opts.userName?opts.userName:"", opts.password?opts.password:"", opts.notes?opts.notes:"");
 	};
 	
 	Accounts.prototype.deleteAccount = function(id){
@@ -46,9 +48,9 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.updateAccount = function(opts){
-		this.db.execute('UPDATE ACCOUNTS SET ACCONT_NAME=?, CATEGORY=?, USER_NAME=?, PASSWORD=? WHERE ID=?', 
+		this.db.execute('UPDATE ACCOUNTS SET ACCONT_NAME=?, CATEGORY=?, USER_NAME=?, PASSWORD=?, NOTES=? WHERE ID=?', 
 			opts.accountName?opts.accountName:"", opts.categoryName?opts.categoryName:"Others", 
-			opts.userName?opts.userName:"", opts.password?opts.password:"", opts.id?opts.id:"");
+			opts.userName?opts.userName:"", opts.password?opts.password:"", opts.notes?opts.notes:"", opts.id?opts.id:"");
 	};
 	PasswordStore.Accounts = Accounts;
 })();
