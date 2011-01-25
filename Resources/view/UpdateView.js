@@ -130,11 +130,13 @@ PasswordStore.UpdateView = function(opts){
 		borderRadius:5
 	});
 	var that = this;
+	this.categoryTextField.addEventListener('focus', function() {
+		that.passwordField.blur();
+	});
 	this.notes.addEventListener('focus', function() {
 		that.view.top = -120;
 	    that.view.animate({bottom: 166, duration:500});
 	});
-	 
 	this.notes.addEventListener('blur', function() {
 		that.view.top = 0;
 	    that.view.animate({bottom: 0, duration:500});

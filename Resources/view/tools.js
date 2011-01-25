@@ -1,5 +1,7 @@
+Ti.include('ImportAccountDetails.js');
 Ti.include('../model/AES.js');
 var win = Ti.UI.currentWindow,
+accountsVO = win.accounts,
 password = Ti.UI.createLabel({
 	text: 'Password',
 	color: '#000000',
@@ -17,11 +19,82 @@ passwordValue = Titanium.UI.createLabel({
 	height: 40,
 	font:{fontWeight:'plain',fontSize:14}
 }),
+lengthLabel = Titanium.UI.createLabel({
+	text: "Length",
+	left:10,
+	top: 50,
+	width:150,
+	height: 25,
+	font:{fontWeight:'bold',fontSize:14}
+}),
+lengthTextField = Titanium.UI.createTextField({
+	value: 6,
+	color:'#000',
+	height:25,
+	top:50,
+	left:160,
+	width:50,
+	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD
+
+}),
+lowerCaseLabel = Titanium.UI.createLabel({
+	text: "Lower Case",
+	left:10,
+	top: 80,
+	width:150,
+	height: 25,
+	font:{fontWeight:'bold',fontSize:14}
+}),
+lowerCaseSwitch = Titanium.UI.createSwitch({
+	value:true,
+	left: 160,
+	top:80
+}),
+upperCaseLabel = Titanium.UI.createLabel({
+	text: "Upper Case",
+	left:10,
+	top: 110,
+	width:150,
+	height: 25,
+	font:{fontWeight:'bold',fontSize:14}
+}),
+upperCaseSwitch = Titanium.UI.createSwitch({
+	value:true,
+	left: 160,
+	top:110
+}),
+numbersLabel = Titanium.UI.createLabel({
+	text: "Numbers",
+	left:10,
+	top: 140,
+	width:150,
+	height: 25,
+	font:{fontWeight:'bold',fontSize:14}
+}),
+numbersSwitch = Titanium.UI.createSwitch({
+	value:true,
+	left: 160,
+	top:140
+}),
+specialCharactersLabel = Titanium.UI.createLabel({
+	text: "Special Characters",
+	left:10,
+	top: 170,
+	width:150,
+	height: 25,
+	font:{fontWeight:'bold',fontSize:14}
+}),
+specialCharactersSwitch = Titanium.UI.createSwitch({
+	value:true,
+	left: 160,
+	top:170
+}),
 oGeneratePasswordButton = Titanium.UI.createButton({
 	title:'Generate Password',
 	height:40,
 	width:145,
-	top:60,
+	top:220,
 	left: 10,
 	color: "#13386c"
 }),
@@ -29,50 +102,49 @@ oCopyToClipboardButton = Titanium.UI.createButton({
 	title:'Send to Clipboard',
 	height:40,
 	width:140,
-	top:60,
+	top:220,
 	left: 165,
 	color: "#13386c"
 }),
-picker = Ti.UI.createPicker({
-	bottom: 20
+oEmailButton = Titanium.UI.createButton({
+	title:'Email Account Details',
+	height:40,
+	width:200,
+	top:270,
+	color: "#13386c"
 });
 	
-var lengthColumn = Ti.UI.createPickerColumn({opacity:0});
-for(var i=1;i<=10;++i){
-	lengthColumn.addRow(Ti.UI.createPickerRow({title:i+""}));
-}
-
-var specialColumn1 = Ti.UI.createPickerColumn();
-specialColumn1.addRow(Ti.UI.createPickerRow({title:'None'}));
-specialColumn1.addRow(Ti.UI.createPickerRow({title:'#Num'}));
-
-var specialColumn2 = Ti.UI.createPickerColumn();
-specialColumn2.addRow(Ti.UI.createPickerRow({title:'None'}));
-specialColumn2.addRow(Ti.UI.createPickerRow({title:'Extra'}));
-
-var specialColumn3 = Ti.UI.createPickerColumn();
-specialColumn3.addRow(Ti.UI.createPickerRow({title:'None'}));
-specialColumn3.addRow(Ti.UI.createPickerRow({title:'UP'}));
-
-picker.add([lengthColumn,specialColumn1, specialColumn2, specialColumn3]);
-picker.selectionIndicator = true;
-	
 oGeneratePasswordButton.addEventListener('click', function(){
-	var iLength = parseInt((picker.getSelectedRow(0).title), 10),
-		bNumber = picker.getSelectedRow(1).title !== "None",
-		bOthers = picker.getSelectedRow(2).title !== "None",
-		bUpper = picker.getSelectedRow(3).title !== "None";
-	passwordValue.text = AES.getPassword(iLength, bNumber, bOthers, bUpper);
+	var iLength = parseInt(lengthTextField.value, 10),
+		bLower = lowerCaseSwitch.value,
+		bNumber = numbersSwitch.value,
+		bOthers = specialCharactersSwitch.value,
+		bUpper = upperCaseSwitch.value;
+	passwordValue.text = AES.getPassword(iLength, bNumber, bOthers, bUpper, bLower);
 });
 
 oCopyToClipboardButton.addEventListener('click', function(){
 	Ti.UI.Clipboard.setText(passwordValue.text);
 });
 
-picker.setSelectedRow(0,4,false);
+oEmailButton.addEventListener('click', function(){
+	var opts = {accountsVO: accountsVO},
+		importAccountDetails = new ImportAccountDetails(opts);
+	importAccountDetails.emailDialog.open();
+});
 
 win.add(password);
 win.add(passwordValue);
 win.add(oCopyToClipboardButton);
 win.add(oGeneratePasswordButton);
-win.add(picker);
+win.add(lengthLabel);
+win.add(lengthTextField);
+win.add(lowerCaseLabel);
+win.add(lowerCaseSwitch);
+win.add(upperCaseLabel);
+win.add(upperCaseSwitch);
+win.add(numbersLabel);
+win.add(numbersSwitch);
+win.add(specialCharactersLabel);
+win.add(specialCharactersSwitch);
+win.add(oEmailButton);

@@ -1,8 +1,6 @@
-Ti.include('ImportAccountDetails.js');
 Ti.include('TableForm.js');
 
 var win = Ti.UI.currentWindow,
-	accountsVO = win.accounts,
 	password = Ti.UI.createLabel({
 		text: 'Password',
 		color: '#000000',
@@ -70,13 +68,6 @@ var win = Ti.UI.currentWindow,
 		value:Ti.App.Properties.getBool('requireLogin',false),
 		left: 80,
 		top:235
-	}),
-	oEmailButton = Titanium.UI.createButton({
-		title:'Email Account Details',
-		height:40,
-		width:200,
-		top:290,
-		color: "#13386c"
 	});
 	
 	checkPasswordSwitch.addEventListener('change',function(e)
@@ -100,12 +91,6 @@ oUpdateButton.addEventListener('click', function(){
 	
 });
 
-oEmailButton.addEventListener('click', function(){
-	var opts = {accountsVO: accountsVO},
-		importAccountDetails = new ImportAccountDetails(opts);
-	importAccountDetails.emailDialog.open();
-});
-
 win.add(password);
 win.add(passwordTextField);
 win.add(passwordConfirmLabel);
@@ -113,4 +98,3 @@ win.add(passwordConfirmTextField);
 win.add(oUpdateButton);
 win.add(checkPasswordLabel);
 win.add(checkPasswordSwitch);
-win.add(oEmailButton);

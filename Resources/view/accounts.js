@@ -1,6 +1,7 @@
 Ti.include('UpdateView.js');
 var win = Titanium.UI.currentWindow,
 	tableView,
+	updateView,
 	data = [],
 	imgMap = {
 		'Credit Card': 'credit-card.png',
@@ -123,6 +124,9 @@ var edit = Titanium.UI.createButton({
 addButton = Titanium.UI.createButton({
 	title:'Add'
 }),
+backButton = Titanium.UI.createButton({
+	title:'Back'
+}),
 cancel = Titanium.UI.createButton({
 	title:'Cancel',
 	style:Titanium.UI.iPhone.SystemButtonStyle.DONE
@@ -132,7 +136,11 @@ edit.addEventListener('click', function()
 	win.setRightNavButton(cancel);
 	tableview.editing = true;
 });
-
+backButton.addEventListener('click', function()
+{
+	displayNavButtons();
+	updateView.view.hide();
+});
 cancel.addEventListener('click', function()
 {
 	win.setRightNavButton(edit);
@@ -152,9 +160,9 @@ addButton.addEventListener('click', function(e)
 });
 
 function showUpadateWindow(opts){
-	win.setLeftNavButton(null);
+	win.setLeftNavButton(backButton);
 	win.setRightNavButton(null);
-	var updateView = new PasswordStore.UpdateView(opts);
+	updateView = new PasswordStore.UpdateView(opts);
 	updateView.updateButton.addEventListener('click', function(){
 		var accountValue = updateView.accountTextField.value,
 				categoryValue = updateView.categoryTextField.value,
