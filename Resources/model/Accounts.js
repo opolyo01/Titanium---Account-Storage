@@ -1,3 +1,4 @@
+ Ti.include('model/jsencryption.js');
 var PasswordStore = {};
 (function() {
 	function Accounts(){
@@ -16,6 +17,7 @@ var PasswordStore = {};
 				userName = rows.fieldByName('USER_NAME'),
 				password = rows.fieldByName('PASSWORD'),
 				notes = rows.fieldByName('NOTES');
+			password = GibberishAES.dec(password, Titanium.Platform.id);
 			accounts.push({
 				id: id,
 				categoryName: categoryName,
@@ -30,9 +32,12 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.insertAccount = function(opts){
+		var password = opts.password?opts.password:"";
+		var encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
+		
 		this.db.execute('INSERT INTO ACCOUNTS (ACCONT_NAME, CATEGORY, USER_NAME, PASSWORD, NOTES) VALUES(?,?,?,?,?)', 
 			opts.accountName?opts.accountName:"", opts.categoryName?opts.categoryName:"Others", 
-			opts.userName?opts.userName:"", opts.password?opts.password:"", opts.notes?opts.notes:"");
+			opts.userName?opts.userName:"", encryptedPassword, opts.notes?opts.notes:"");
 	};
 	
 	Accounts.prototype.deleteAccount = function(id){
@@ -48,9 +53,12 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.updateAccount = function(opts){
+		var password = opts.password?opts.password:"";
+		var encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
+		
 		this.db.execute('UPDATE ACCOUNTS SET ACCONT_NAME=?, CATEGORY=?, USER_NAME=?, PASSWORD=?, NOTES=? WHERE ID=?', 
 			opts.accountName?opts.accountName:"", opts.categoryName?opts.categoryName:"Others", 
-			opts.userName?opts.userName:"", opts.password?opts.password:"", opts.notes?opts.notes:"", opts.id?opts.id:"");
+			opts.userName?opts.userName:"", encryptedPassword, opts.notes?opts.notes:"", opts.id?opts.id:"");
 	};
 	PasswordStore.Accounts = Accounts;
 })();
