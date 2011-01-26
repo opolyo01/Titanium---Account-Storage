@@ -103,7 +103,14 @@ oUpdateButton.addEventListener('click', function(){
 });
 
 oUpdateSecurityQuestion.addEventListener('click', function(){
-	var oSecurityQuestion = new UpdateSecurityQuestion({});
+	var securityQuestion = Ti.App.Properties.getString('securityQuestion',''),
+		securityAnswer = Ti.App.Properties.getString('securityAnswer','');
+	securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
+	securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
+	var oSecurityQuestion = new UpdateSecurityQuestion({
+		securityQuestion: securityQuestion,
+		securityAnswer: securityAnswer
+	});
 	win.add(oSecurityQuestion.view);
 	oSecurityQuestion.securityButton.addEventListener('click', function(){
 		var sSecurityQuestion = oSecurityQuestion.securityTextField.value,
@@ -126,6 +133,10 @@ oUpdateSecurityQuestion.addEventListener('click', function(){
 	});
 });
 
+win.addEventListener("click", function(){
+    passwordTextField.blur();
+	passwordConfirmTextField.blur();
+});
 
 win.add(password);
 win.add(passwordTextField);

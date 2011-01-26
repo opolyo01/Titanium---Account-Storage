@@ -12,13 +12,13 @@ PasswordStore.TabView = function(){
 	}),
 	oTools = Ti.UI.createWindow({  
 	    title:'Tools',
-	    backgroundColor:'#fff',
+	    backgroundColor:'#ccc',
 		url: "view/tools.js",
 		accounts: accounts
 	}),
 	oSettings = Ti.UI.createWindow({  
 	    title:'Settings',
-	    backgroundColor:'#fff',
+	    backgroundColor:'#ccc',
 		url: 'view/settings.js',
 		accounts: accounts
 	});
@@ -42,4 +42,11 @@ PasswordStore.TabView = function(){
 	this.tabGroup.addTab(oHomeTab);
 	this.tabGroup.addTab(oToolsTab);
 	this.tabGroup.addTab(oSettingsTab);
+	
+	
+	var firstLogin = Ti.App.Properties.getBool('firstLogin',true);
+	if(firstLogin){
+		this.tabGroup.setActiveTab(oSettingsTab);
+		Ti.App.Properties.setBool("firstLogin", false);
+	}
 };

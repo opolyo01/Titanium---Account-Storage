@@ -1,7 +1,7 @@
 Ti.include('model/jsencryption.js');
 Ti.include('view/UpdateSecurityQuestion.js');
 Ti.include('view/TabView.js');
-Ti.UI.setBackgroundColor('#eee');
+Ti.UI.setBackgroundColor('#ccc');
 
 (function() {
 	function Application(){
@@ -22,21 +22,21 @@ Ti.UI.setBackgroundColor('#eee');
 		else{
 			loginView = Ti.UI.createWindow();
 			var passwordLabel = Ti.UI.createLabel({
-				text: 'Master Password',
+				text: 'Enter Master Password',
 				color: '#000000',
 				textAlign:'left',
 				top: 100,
-				left:10,
-				width: 120,
+				left:50,
+				width: "auto",
 				height:40,
-				font:{fontWeight:'bold',fontSize:16}
+				font:{fontWeight:'bold',fontSize:18}
 			}),
 			passwordTextField = Titanium.UI.createTextField({
 				color: '#666666',
 				textAlign:'left',
-				left:110,
-				width:170,
-				top: 100,
+				left:50,
+				width:200,
+				top: 150,
 				height: 30,
 				font:{fontWeight:'plain',fontSize:14},
 				autocorrect:false,
@@ -49,14 +49,16 @@ Ti.UI.setBackgroundColor('#eee');
 				title:'Login',
 				height:40,
 				width:100,
-				top:150,
+				top:200,
+				left: 20,
 				color: "#13386c"
 			}),
 			oFogotPasswordButton = Titanium.UI.createButton({
 				title:'Forgot Password',
 				height:40,
-				width:200,
-				top:230,
+				left: 125,
+				width:150,
+				top:200,
 				color: "#13386c"
 			});
 			oLoginButton.addEventListener('click', function(){
@@ -72,6 +74,7 @@ Ti.UI.setBackgroundColor('#eee');
 			});
 			oFogotPasswordButton.addEventListener('click', function(e){
 				var oSecurityQuestion = new UpdateSecurityQuestion({
+					securityQuestion: securityQuestion,
 					heading: "Answer Security Question",
 					positiveButton: "Submit"
 				});
@@ -91,6 +94,9 @@ Ti.UI.setBackgroundColor('#eee');
 				oSecurityQuestion.securityCancelButton.addEventListener('click', function(){
 					oSecurityQuestion.view.hide();
 				});
+			});
+			loginView.addEventListener("click", function(){
+			    passwordTextField.blur();
 			});
 			loginView.add(passwordLabel);
 			loginView.add(passwordTextField);

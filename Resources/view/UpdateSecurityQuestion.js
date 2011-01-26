@@ -1,12 +1,12 @@
 UpdateSecurityQuestion = function(opts){
 	this.view = Titanium.UI.createView({
-	   backgroundColor:'#fff'
+	   backgroundColor:'#ccc'
 	});
 	var securityHeadingLabel = Titanium.UI.createLabel({
-		text:opts.heading || 'Update Security Question/Answer',
+		text:opts.heading || 'Security Question/Answer',
 		height:30,
 		top:40,
-		left: 10,
+		left: 30,
 		width:"auto",
 		color:'000',
 		font:{fontSize:18, fontWeight:'bold'},
@@ -17,17 +17,17 @@ UpdateSecurityQuestion = function(opts){
 		height:30,
 		top:100,
 		left: 10,
-		width:100,
+		width:90,
 		color:'000',
 		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.securityTextField = Titanium.UI.createTextField({
-		value: opts.accountValue || "",
+		value: opts.securityQuestion || "",
 		height:30,
 		top:100,
-		left:120,
-		width:150,
+		left:100,
+		width:200,
 		font:{fontSize:12},
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
@@ -37,16 +37,16 @@ UpdateSecurityQuestion = function(opts){
 		height:30,
 		top:150,
 		left: 10,
-		width:100,
+		width:90,
 		color:'#000',
 		font:{fontSize:12, fontWeight:'bold'},
 		textAlign:'center'
 	});
 	this.securityAnswerTextField = Titanium.UI.createTextField({
-		value:opts.userValue || "",
+		value:opts.securityAnswer || "",
 		top:150,
-		left:120,
-		width:150,
+		left:100,
+		width:200,
 		height: 30,
 		font:{fontSize:12},
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,

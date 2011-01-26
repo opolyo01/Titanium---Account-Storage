@@ -17,12 +17,15 @@ function ComboBox(opts){
 		}),
 		picker_data = [
 			Titanium.UI.createPickerRow({title:'Credit Card'}),
+			Titanium.UI.createPickerRow({title:'Bank'}),
+			Titanium.UI.createPickerRow({title:'Web'}),
 			Titanium.UI.createPickerRow({title:'Social Networking'}),
 			Titanium.UI.createPickerRow({title:'Shopping'}),
 			Titanium.UI.createPickerRow({title:'Work'}),
 			Titanium.UI.createPickerRow({title:'Healthcare'}),
 			Titanium.UI.createPickerRow({title:'Computer'}),
 			Titanium.UI.createPickerRow({title:'Phone'}),
+			Titanium.UI.createPickerRow({title:'Email'}),
 			Titanium.UI.createPickerRow({title:'Others'})
 		],
 		slide_in =  Titanium.UI.createAnimation({bottom:0}),
@@ -36,7 +39,7 @@ function ComboBox(opts){
 	picker.selectionIndicator=true;
 	picker.add(picker_data);
 	
-	var drop_button =  Titanium.UI.createButton({
+	this.drop_button =  Titanium.UI.createButton({
 		style:Titanium.UI.iPhone.SystemButton.DISCLOSURE,
 		transform:tr
 	});
@@ -50,7 +53,7 @@ function ComboBox(opts){
 		font:{fontSize:12},
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		rightButton:drop_button,
+		rightButton:this.drop_button,
 		rightButtonMode:Titanium.UI.INPUT_BUTTONMODE_ALWAYS
 	});
 	this.picker_view = Titanium.UI.createView({
@@ -65,7 +68,7 @@ function ComboBox(opts){
 		that.picker_view.animate(slide_out);
 	});
 	
-	drop_button.addEventListener('click',function() {
+	this.drop_button.addEventListener('click',function() {
 		that.picker_view.animate(slide_in);
 		picker.setSelectedRow(0,getRow(),false);
 		that.comboTextField.blur();
@@ -85,20 +88,26 @@ function ComboBox(opts){
 		{
 			case "Credit Card":
 			  return 0;
-			case 'Social Networking':
+			case 'Bank':
 			  return 1;
-			case 'Shopping':
+			case 'Web':
 			  return 2;
-			case 'Work':
+			case 'Social Networking':
 			  return 3;
-			case 'Healthcare':
+			case 'Shopping':
 			  return 4;
-			case 'Computer':
+			case 'Work':
 			  return 5;
-			case 'Phone':
+			case 'Healthcare':
 			  return 6;
-			case 'Others':
+			case 'Computer':
 			  return 7;
+			case 'Phone':
+			  return 8;
+			case 'Email':
+			  return 9;
+			case 'Others':
+			  return 10;
 			default:
 			  return 0;
 		}

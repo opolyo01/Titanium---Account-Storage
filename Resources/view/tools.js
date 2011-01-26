@@ -1,5 +1,6 @@
 Ti.include('ImportAccountDetails.js');
 Ti.include('../model/PasswordGenerator.js');
+
 var win = Ti.UI.currentWindow,
 accountsVO = win.accounts,
 password = Ti.UI.createLabel({
@@ -34,6 +35,7 @@ lengthTextField = Titanium.UI.createTextField({
 	top:50,
 	left:160,
 	width:50,
+	enableReturnKey: true,
 	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
 	keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD
 
@@ -133,6 +135,10 @@ oEmailButton.addEventListener('click', function(){
 	importAccountDetails.emailDialog.open();
 });
 
+win.addEventListener("click", function()
+{
+    lengthTextField.blur();
+});
 win.add(password);
 win.add(passwordValue);
 win.add(oCopyToClipboardButton);

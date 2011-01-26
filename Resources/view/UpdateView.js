@@ -42,7 +42,7 @@ PasswordStore.UpdateView = function(opts){
 		textAlign:'center'
 	});
 	this.userTextField = Titanium.UI.createTextField({
-		value:"",
+		value:opts.userValue || "",
 		top:50,
 		left:120,
 		width:150,
@@ -62,7 +62,7 @@ PasswordStore.UpdateView = function(opts){
 		textAlign:'center'
 	});
 	this.passwordField = Titanium.UI.createTextField({
-		value:"",
+		value:opts.passwordValue || "",
 		top:90,
 		left:120,
 		width:150,
@@ -131,7 +131,7 @@ PasswordStore.UpdateView = function(opts){
 	});
 	var that = this;
 	this.categoryTextField.addEventListener('focus', function() {
-		that.passwordField.blur();
+		that.categoryTextField.blur();
 	});
 	this.notes.addEventListener('focus', function() {
 		that.view.top = -120;
@@ -140,6 +140,18 @@ PasswordStore.UpdateView = function(opts){
 	this.notes.addEventListener('blur', function() {
 		that.view.top = 0;
 	    that.view.animate({bottom: 0, duration:500});
+	});
+	
+	this.view.addEventListener("click", function(){
+		that.accountTextField.blur();
+	    that.passwordField.blur();
+		that.userTextField.blur();
+	});
+	
+	oComboCategoryTextField.drop_button.addEventListener("click", function(){
+		that.accountTextField.blur();
+	    that.passwordField.blur();
+		that.userTextField.blur();
 	});
 	this.view.add(accountLabel);
 	this.view.add(this.accountTextField);

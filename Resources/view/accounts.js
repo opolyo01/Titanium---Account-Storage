@@ -11,6 +11,9 @@ var win = Titanium.UI.currentWindow,
 		'Healthcare': 'health.png',
 		'Computer': 'computer.png',
 		'Phone': 'phone.png',
+		'Bank': 'bank.png',
+		'Web': 'web.png',
+		'Email': 'email.png',
 		'Others': 'others.png'
 	},
 	accountsVO = win.accounts;
