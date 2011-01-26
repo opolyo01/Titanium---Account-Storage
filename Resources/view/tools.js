@@ -1,5 +1,5 @@
 Ti.include('ImportAccountDetails.js');
-Ti.include('../model/AES.js');
+Ti.include('../model/PasswordGenerator.js');
 var win = Ti.UI.currentWindow,
 accountsVO = win.accounts,
 password = Ti.UI.createLabel({
