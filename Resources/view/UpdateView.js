@@ -42,7 +42,7 @@ PasswordStore.UpdateView = function(opts){
 		textAlign:'center'
 	});
 	this.userTextField = Titanium.UI.createTextField({
-		value:opts.userValue || "",
+		value:"",
 		top:50,
 		left:120,
 		width:150,
@@ -62,7 +62,7 @@ PasswordStore.UpdateView = function(opts){
 		textAlign:'center'
 	});
 	this.passwordField = Titanium.UI.createTextField({
-		value:opts.passwordValue || "",
+		value:"",
 		top:90,
 		left:120,
 		width:150,

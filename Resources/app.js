@@ -1,15 +1,23 @@
+Ti.include('model/jsencryption.js');
+Ti.include('view/UpdateSecurityQuestion.js');
 Ti.include('view/TabView.js');
 Ti.UI.setBackgroundColor('#eee');
 
 (function() {
 	function Application(){
-			var password = Ti.App.Properties.getString('password',''),
+		var password = Ti.App.Properties.getString('password',''),
+			securityQuestion = Ti.App.Properties.getString('securityQuestion',''),
+			securityAnswer = Ti.App.Properties.getString('securityAnswer',''),
 			isRequiredLogin = Ti.App.Properties.getBool('requireLogin',false),
 			tabView,
 			loginView;
+		
+		password = password === ""? "" : GibberishAES.dec(password, Titanium.Platform.id),
+		securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
+		securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
+		
 		if(!isRequiredLogin){
-			tabView = new PasswordStore.TabView();
-			tabView.tabGroup.open();
+			openTabView();
 		}
 		else{
 			loginView = Ti.UI.createWindow();
@@ -43,23 +51,57 @@ Ti.UI.setBackgroundColor('#eee');
 				width:100,
 				top:150,
 				color: "#13386c"
+			}),
+			oFogotPasswordButton = Titanium.UI.createButton({
+				title:'Forgot Password',
+				height:40,
+				width:200,
+				top:230,
+				color: "#13386c"
 			});
 			oLoginButton.addEventListener('click', function(){
 				var passwordEntered = passwordTextField.value;
 					
 				if(passwordEntered === password){
-					tabView = new PasswordStore.TabView();
-					tabView.tabGroup.open();
+					openTabView();
 				}
 				else{
 					alert("Invalid credentials were entered.  Try again.");
 				}
 				
 			});
+			oFogotPasswordButton.addEventListener('click', function(e){
+				var oSecurityQuestion = new UpdateSecurityQuestion({
+					heading: "Answer Security Question",
+					positiveButton: "Submit"
+				});
+				loginView.add(oSecurityQuestion.view);
+				oSecurityQuestion.securityButton.addEventListener('click', function(){
+					var sSecurityQuestion = oSecurityQuestion.securityTextField.value,
+						sSecurityAnswer = oSecurityQuestion.securityAnswerTextField.value;
+					if(sSecurityQuestion === securityQuestion && sSecurityAnswer === securityAnswer){
+						oSecurityQuestion.view.hide();
+						openTabView();
+					}
+					else{
+						alert("Wrong security question or answer entered");
+					}
+				});
+	
+				oSecurityQuestion.securityCancelButton.addEventListener('click', function(){
+					oSecurityQuestion.view.hide();
+				});
+			});
 			loginView.add(passwordLabel);
 			loginView.add(passwordTextField);
 			loginView.add(oLoginButton);
+			loginView.add(oFogotPasswordButton);
 			loginView.open();
+		}
+		
+		function openTabView(){
+			tabView = new PasswordStore.TabView();
+			tabView.tabGroup.open();
 		}
 	}
 	PasswordStore.Application = Application;

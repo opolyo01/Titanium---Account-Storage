@@ -1,4 +1,6 @@
+Ti.include('../model/jsencryption.js');
 Ti.include('TableForm.js');
+Ti.include('UpdateSecurityQuestion.js');
 
 var win = Ti.UI.currentWindow,
 	password = Ti.UI.createLabel({
@@ -12,7 +14,7 @@ var win = Ti.UI.currentWindow,
 		font:{fontWeight:'bold',fontSize:16}
 	}),
 	passwordTextField = Titanium.UI.createTextField({
-		value: Ti.App.Properties.getString('password',''),
+		value: "",
 		left:120,
 		top: 10,
 		width:190,
@@ -35,7 +37,7 @@ var win = Ti.UI.currentWindow,
 		font:{fontWeight:'bold',fontSize:16}
 	}),
 	passwordConfirmTextField = Titanium.UI.createTextField({
-		value: Ti.App.Properties.getString('password',''),
+		value: "",
 		left:120,
 		top: 60,
 		width:190,
@@ -68,6 +70,13 @@ var win = Ti.UI.currentWindow,
 		value:Ti.App.Properties.getBool('requireLogin',false),
 		left: 80,
 		top:235
+	}),
+	oUpdateSecurityQuestion = Titanium.UI.createButton({
+		title:'Update Security Question',
+		height:40,
+		width:220,
+		top:280,
+		color: "#13386c"
 	});
 	
 	checkPasswordSwitch.addEventListener('change',function(e)
@@ -86,10 +95,37 @@ oUpdateButton.addEventListener('click', function(){
 	}
 	else{
 		alert("Master password has been reset");
-		Ti.App.Properties.setString("password", passwordTextField.value);
+		//var platformId = Titanium.Platform.id;
+		var encryptedPassword = GibberishAES.enc(passwordTextField.value, Titanium.Platform.id);
+		Ti.App.Properties.setString("password", encryptedPassword);
 	}
 	
 });
+
+oUpdateSecurityQuestion.addEventListener('click', function(){
+	var oSecurityQuestion = new UpdateSecurityQuestion({});
+	win.add(oSecurityQuestion.view);
+	oSecurityQuestion.securityButton.addEventListener('click', function(){
+		var sSecurityQuestion = oSecurityQuestion.securityTextField.value,
+			sSecurityAnswer = oSecurityQuestion.securityAnswerTextField.value;
+		if(sSecurityQuestion.length < 5 || sSecurityAnswer.length < 5){
+			alert("Security question and answer has to be at least 5 characters.");
+		}
+		else{
+			alert("Security question and answer has been set.");
+			var encryptedQuestion = GibberishAES.enc(sSecurityQuestion, Titanium.Platform.id),
+				encryptedAnswer = GibberishAES.enc(sSecurityAnswer, Titanium.Platform.id);
+			Ti.App.Properties.setString("securityQuestion", encryptedQuestion);
+			Ti.App.Properties.setString("securityAnswer", encryptedAnswer);
+			oSecurityQuestion.view.hide();
+		}
+	});
+	
+	oSecurityQuestion.securityCancelButton.addEventListener('click', function(){
+		oSecurityQuestion.view.hide();
+	});
+});
+
 
 win.add(password);
 win.add(passwordTextField);
@@ -98,3 +134,4 @@ win.add(passwordConfirmTextField);
 win.add(oUpdateButton);
 win.add(checkPasswordLabel);
 win.add(checkPasswordSwitch);
+win.add(oUpdateSecurityQuestion);
