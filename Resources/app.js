@@ -11,11 +11,13 @@ Ti.UI.setBackgroundColor('#ccc');
 			isRequiredLogin = Ti.App.Properties.getBool('requireLogin',false),
 			tabView,
 			loginView;
-		
-		password = password === ""? "" : GibberishAES.dec(password, Titanium.Platform.id),
-		securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
-		securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
-		
+		try{
+			password = password === ""? "" : GibberishAES.dec(password, Titanium.Platform.id),
+			securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
+			securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
+		}
+		catch(err){
+		}
 		if(!isRequiredLogin){
 			openTabView();
 		}

@@ -17,7 +17,12 @@ var PasswordStore = {};
 				userName = rows.fieldByName('USER_NAME'),
 				password = rows.fieldByName('PASSWORD'),
 				notes = rows.fieldByName('NOTES');
-			password = GibberishAES.dec(password, Titanium.Platform.id);
+			try{
+				password = GibberishAES.dec(password, Titanium.Platform.id);
+			}
+			catch(err){
+				password = "";
+			}
 			accounts.push({
 				id: id,
 				categoryName: categoryName,
@@ -32,7 +37,14 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.insertAccount = function(opts){
-		var password = opts.password?opts.password:"";
+		var password = opts.password?opts.password:"",
+			encryptedPassword = "";
+		try{
+			encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
+		}
+		catch(err){
+			encryptedPassword = "";
+		}
 		var encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
 		
 		this.db.execute('INSERT INTO ACCOUNTS (ACCONT_NAME, CATEGORY, USER_NAME, PASSWORD, NOTES) VALUES(?,?,?,?,?)', 
@@ -53,9 +65,14 @@ var PasswordStore = {};
 	};
 	
 	Accounts.prototype.updateAccount = function(opts){
-		var password = opts.password?opts.password:"";
-		var encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
-		
+		var password = opts.password?opts.password:"",
+			encryptedPassword = "";
+		try{
+			encryptedPassword = password === "" ? "" : GibberishAES.enc(password, Titanium.Platform.id);
+		}
+		catch(err){
+			encryptedPassword = "";
+		}
 		this.db.execute('UPDATE ACCOUNTS SET ACCONT_NAME=?, CATEGORY=?, USER_NAME=?, PASSWORD=?, NOTES=? WHERE ID=?', 
 			opts.accountName?opts.accountName:"", opts.categoryName?opts.categoryName:"Others", 
 			opts.userName?opts.userName:"", encryptedPassword, opts.notes?opts.notes:"", opts.id?opts.id:"");

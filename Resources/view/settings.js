@@ -105,8 +105,14 @@ oUpdateButton.addEventListener('click', function(){
 oUpdateSecurityQuestion.addEventListener('click', function(){
 	var securityQuestion = Ti.App.Properties.getString('securityQuestion',''),
 		securityAnswer = Ti.App.Properties.getString('securityAnswer','');
-	securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
-	securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
+	try{
+		securityQuestion = securityQuestion === ""? "" : GibberishAES.dec(securityQuestion, Titanium.Platform.id),
+		securityAnswer = securityAnswer === ""? "" : GibberishAES.dec(securityAnswer, Titanium.Platform.id);
+	}
+	catch(err){
+		securityQuestion = "";
+		securityAnswer = "";
+	}
 	var oSecurityQuestion = new UpdateSecurityQuestion({
 		securityQuestion: securityQuestion,
 		securityAnswer: securityAnswer

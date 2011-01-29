@@ -56,7 +56,7 @@ function reload(){
 		var curAccount = accountsList[i],
 			accountName = curAccount.accountName,
 			curCategoryName = curAccount.categoryName,
-			newAccountNameFirstChar = accountName[0].toUpperCase(),
+			newAccountNameFirstChar = accountName[0] ? accountName[0].toUpperCase() : "",
 			config = {
 				text: accountName, 
 				height:50,
@@ -172,29 +172,34 @@ function showUpadateWindow(opts){
 				userValue = updateView.userTextField.value,
 				passwordValue = updateView.passwordField.value,
 				notesValue = updateView.notes.value;
-		if(opts.positiveButton === "Save"){
-			accountsVO.insertAccount({
-				accountName: accountValue,
-				categoryName: categoryValue,
-				userName: userValue,
-				password: passwordValue,
-				notes: notesValue
-			});
-			reload();
+		if(accountValue){
+			if(opts.positiveButton === "Save"){
+				accountsVO.insertAccount({
+					accountName: accountValue,
+					categoryName: categoryValue,
+					userName: userValue,
+					password: passwordValue,
+					notes: notesValue
+				});
+				reload();
+			}
+			else{
+				accountsVO.updateAccount({
+					accountName: accountValue,
+					categoryName: categoryValue,
+					userName: userValue,
+					password: passwordValue,
+					notes: notesValue,
+					id: opts.id
+				});
+				reload();
+			}
+			displayNavButtons();
+			updateView.view.hide();
 		}
 		else{
-			accountsVO.updateAccount({
-				accountName: accountValue,
-				categoryName: categoryValue,
-				userName: userValue,
-				password: passwordValue,
-				notes: notesValue,
-				id: opts.id
-			});
-			reload();
+			alert("Account name cannot be empty.");
 		}
-		displayNavButtons();
-		updateView.view.hide();
 	});
 	updateView.cancelButton.addEventListener('click', function(){
 		displayNavButtons();
