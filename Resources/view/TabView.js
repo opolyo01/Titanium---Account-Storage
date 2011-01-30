@@ -5,19 +5,19 @@ PasswordStore.TabView = function(){
 	this.tabGroup = Ti.UI.createTabGroup();
 
 	var oHome = Ti.UI.createWindow({  
-	    title:'Accounts',
+	    title:L("accounts","default_not_set"),
 	    backgroundColor:'#fff',
 		url: "view/accounts.js",
 		accounts: accounts
 	}),
 	oTools = Ti.UI.createWindow({  
-	    title:'Tools',
+	    title:L("tools","default_not_set"),
 	    backgroundColor:'#ccc',
 		url: "view/tools.js",
 		accounts: accounts
 	}),
 	oSettings = Ti.UI.createWindow({  
-	    title:'Settings',
+	    title:L("settings","default_not_set"),
 	    backgroundColor:'#ccc',
 		url: 'view/settings.js',
 		accounts: accounts
@@ -25,17 +25,17 @@ PasswordStore.TabView = function(){
 
 	var oHomeTab = Ti.UI.createTab({  
 	    icon:'images/home.png',
-	    title:'Accounts',
+	    title:L("accounts","default_not_set"),
 	    window:oHome
 	}),
 	oToolsTab = Ti.UI.createTab({  
 	    icon:'images/tools.png',
-	    title:'Tools',
+	    title:L("tools","default_not_set"),
 	    window:oTools
 	}),
 	oSettingsTab = Ti.UI.createTab({  
 	    icon:'images/settings.png',
-	    title:'Settings',
+	    title:L("settings","default_not_set"),
 	    window:oSettings
 	});
 

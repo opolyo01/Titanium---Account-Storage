@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="enter_master_password">Введите главный пароль</string>
+	<string name="forgot_password">Забыли пароль?</string>
+	<string name="answer_security_question">Ответ на Вопрос безопасности</string> 
+	<string name="submit">Отправить</string>
+	<string name="wrong_security_question">Неправильный вопрос безопасности или ответить вошли</string>
+	<string name="login">Войти</string>
+	
+	<string name="accounts">Экаунты</string>
+	<string name="tools">Инструменты</string>
+	<string name="settings">Настройки</string>
+	
+	<string name="password">Пароль</string>
+	<string name="confirm_password">Подтвердить</string>
+	<string name="update_master_password">Обновить главный пароль</string>
+	<string name="require_master_password">Спрашивать главный пароль? </string>
+	<string name="update_security_question">Вопрос Безопасности</string>
+	
+	<string name="security_question_answer">Безопасности Вопрос/Ответ </string>
+	<string name="security_question">Вопрос Безопасности</string>
+	<string name="security_answer">Ответ</string>
+	<string name="master_password">Главный пароль</string>
+	
+	<string name="generate_password">Создать пароль</string>
+	<string name="send_to_clipboard">Отправить в буфер</string>
+	<string name="email_account_details">Отправить письмо с Экаунтами</string>
+	
+	<string name="credit_card">Кредитная карта</string>
+	<string name="bank">Банк</string>
+	<string name="web">Веб</string>
+	<string name="social_networking">Социальные Сети</string>
+	<string name="shopping">Покупка</string>
+	<string name="work">Работа</string>
+	<string name="healthcare">Здоровье</string>
+	<string name="computer">Компьютер</string>
+	<string name="phone">Телефон</string>
+	<string name="email">Почта</string>
+	<string name="others">Другое</string>
+	
+</resources>

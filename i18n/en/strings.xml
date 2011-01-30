@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<string name="enter_master_password">Enter Master Password</string>
+	<string name="forgot_password">Forgot Password</string>
+	<string name="answer_security_question">Answer Security Question</string> 
+	<string name="submit">Submit</string>
+	<string name="wrong_security_question">Wrong security question or answer entered</string>
+	<string name="login">Login</string>
+	
+	<string name="accounts">Accounts</string>
+	<string name="tools">Tools</string>
+	<string name="settings">Settings</string>
+	
+	<string name="password">Password</string>
+	<string name="confirm_password">Confirm Password</string>
+	<string name="update_master_password">Update Master Password</string>
+	<string name="require_master_password">Require master password? (recommended)</string>
+	<string name="update_security_question">Update Securiy Question</string>
+	
+	<string name="security_question_answer">Security Question/Answer </string>
+	<string name="security_question">Security Question</string>
+	<string name="security_answer">Security Answer</string>
+	<string name="master_password">Master Password</string>
+	
+	<string name="generate_password">Generate Password</string>
+	<string name="send_to_clipboard">Send to Clipboard</string>
+	<string name="email_account_details">Email Account Details</string>
+	
+	<string name="credit_card">Credit Card</string>
+	<string name="bank">Bank</string>
+	<string name="web">Web</string>
+	<string name="social_networking">Social Networking</string>
+	<string name="shopping">Shopping</string>
+	<string name="work">Work</string>
+	<string name="healthcare">Healthcare</string>
+	<string name="computer">Computer</string>
+	<string name="phone">Phone</string>
+	<string name="email">Email</string>
+	<string name="others">Others</string>
+	
+	
+</resources>

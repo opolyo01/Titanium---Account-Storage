@@ -93,7 +93,7 @@ specialCharactersSwitch = Titanium.UI.createSwitch({
 	top:170
 }),
 oGeneratePasswordButton = Titanium.UI.createButton({
-	title:'Generate Password',
+	title:L("generate_password","default_not_set"),
 	height:40,
 	width:145,
 	top:220,
@@ -101,17 +101,17 @@ oGeneratePasswordButton = Titanium.UI.createButton({
 	color: "#13386c"
 }),
 oCopyToClipboardButton = Titanium.UI.createButton({
-	title:'Send to Clipboard',
+	title:L("send_to_clipboard","default_not_set"),
 	height:40,
-	width:140,
+	width:150,
 	top:220,
 	left: 165,
 	color: "#13386c"
 }),
 oEmailButton = Titanium.UI.createButton({
-	title:'Email Account Details',
+	title:L("email_account_details","default_not_set"),
 	height:40,
-	width:200,
+	width:240,
 	top:270,
 	color: "#13386c"
 });
@@ -126,7 +126,9 @@ oGeneratePasswordButton.addEventListener('click', function(){
 });
 
 oCopyToClipboardButton.addEventListener('click', function(){
-	Ti.UI.Clipboard.setText(passwordValue.text);
+	if(passwordValue && passwordValue.text){
+		Ti.UI.Clipboard.setText(passwordValue.text);
+	}
 });
 
 oEmailButton.addEventListener('click', function(){

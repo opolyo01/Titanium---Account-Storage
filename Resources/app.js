@@ -24,7 +24,7 @@ Ti.UI.setBackgroundColor('#ccc');
 		else{
 			loginView = Ti.UI.createWindow();
 			var passwordLabel = Ti.UI.createLabel({
-				text: 'Enter Master Password',
+				text: L("enter_master_password","default_not_set"),
 				color: '#000000',
 				textAlign:'left',
 				top: 100,
@@ -48,7 +48,7 @@ Ti.UI.setBackgroundColor('#ccc');
 				autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE
 			}),
 			oLoginButton = Titanium.UI.createButton({
-				title:'Login',
+				title:L("login","default_not_set"),
 				height:40,
 				width:100,
 				top:200,
@@ -56,7 +56,7 @@ Ti.UI.setBackgroundColor('#ccc');
 				color: "#13386c"
 			}),
 			oFogotPasswordButton = Titanium.UI.createButton({
-				title:'Forgot Password',
+				title:L("forgot_password","default_not_set"),
 				height:40,
 				left: 125,
 				width:150,
@@ -77,8 +77,8 @@ Ti.UI.setBackgroundColor('#ccc');
 			oFogotPasswordButton.addEventListener('click', function(e){
 				var oSecurityQuestion = new UpdateSecurityQuestion({
 					securityQuestion: securityQuestion,
-					heading: "Answer Security Question",
-					positiveButton: "Submit"
+					heading: L("answer_security_question","default_not_set"),
+					positiveButton: L("submit","default_not_set")
 				});
 				loginView.add(oSecurityQuestion.view);
 				oSecurityQuestion.securityButton.addEventListener('click', function(){
@@ -89,7 +89,7 @@ Ti.UI.setBackgroundColor('#ccc');
 						openTabView();
 					}
 					else{
-						alert("Wrong security question or answer entered");
+						alert(L("wrong_security_question","default_not_set"));
 					}
 				});
 	

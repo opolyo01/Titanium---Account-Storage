@@ -4,13 +4,13 @@ Ti.include('UpdateSecurityQuestion.js');
 
 var win = Ti.UI.currentWindow,
 	password = Ti.UI.createLabel({
-		text: 'Password',
+		text: L("password","default_not_set"),
 		color: '#000000',
 		textAlign:'left',
 		left:10,
 		top: 10,
 		height:40,
-		width: 100,
+		width: 110,
 		font:{fontWeight:'bold',fontSize:16}
 	}),
 	passwordTextField = Titanium.UI.createTextField({
@@ -27,13 +27,13 @@ var win = Ti.UI.currentWindow,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE
 	}),
 	passwordConfirmLabel = Ti.UI.createLabel({
-		text: 'Confirm Password',
+		text: L("confirm_password","default_not_set"),
 		color: '#000000',
 		textAlign:'left',
 		left:10,
 		top: 60,
 		height:40,
-		width: 100,
+		width: 110,
 		font:{fontWeight:'bold',fontSize:16}
 	}),
 	passwordConfirmTextField = Titanium.UI.createTextField({
@@ -51,14 +51,14 @@ var win = Ti.UI.currentWindow,
 		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE
 	}),
 	oUpdateButton = Titanium.UI.createButton({
-		title:'Update Master Password',
+		title:L("update_master_password","default_not_set"),
 		height:40,
 		width:220,
 		top:120,
 		color: "#13386c"
 	}),
 	checkPasswordLabel = Titanium.UI.createLabel({
-		text: "Require master password? (recommended)",
+		text: L("require_master_password","default_not_set"),
 		top: 195,
 		width: 300,
 		color: "#000",
@@ -72,7 +72,7 @@ var win = Ti.UI.currentWindow,
 		top:235
 	}),
 	oUpdateSecurityQuestion = Titanium.UI.createButton({
-		title:'Update Security Question',
+		title:L("update_security_question","default_not_set"),
 		height:40,
 		width:220,
 		top:280,

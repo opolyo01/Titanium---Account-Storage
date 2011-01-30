@@ -4,7 +4,7 @@ var PasswordStore = {};
 		var data = [],
 			row,
 			passwordLabel = Ti.UI.createLabel({
-				text: 'Master Password',
+				text: L("master_password","default_not_set"),
 				color: '#000000',
 				textAlign:'left',
 				left:10,

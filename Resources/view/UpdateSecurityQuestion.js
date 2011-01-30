@@ -3,7 +3,7 @@ UpdateSecurityQuestion = function(opts){
 	   backgroundColor:'#ccc'
 	});
 	var securityHeadingLabel = Titanium.UI.createLabel({
-		text:opts.heading || 'Security Question/Answer',
+		text:opts.heading || L("security_question_answer","default_not_set"),
 		height:30,
 		top:40,
 		left: 30,
@@ -13,7 +13,7 @@ UpdateSecurityQuestion = function(opts){
 		textAlign:'center'
 	});
 	var securityLabel = Titanium.UI.createLabel({
-		text:'Security Question',
+		text:L("security_question","default_not_set"),
 		height:30,
 		top:100,
 		left: 10,
@@ -33,7 +33,7 @@ UpdateSecurityQuestion = function(opts){
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 	});
 	var securityAnswerLabel = Titanium.UI.createLabel({
-		text:'Security Answer',
+		text:L("security_answer","default_not_set"),
 		height:30,
 		top:150,
 		left: 10,

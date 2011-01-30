@@ -28,7 +28,6 @@ PasswordStore.UpdateView = function(opts){
 		left:120,
 		width:150,
 		font:{fontSize:12},
-		autocapitalization: Titanium.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
 	});
 	var userLabel = Titanium.UI.createLabel({
