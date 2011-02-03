@@ -16,17 +16,16 @@ function ComboBox(opts){
 			items:[cancel,spacer,done]
 		}),
 		picker_data = [
-			Titanium.UI.createPickerRow({title:'Credit Card'}),
 			Titanium.UI.createPickerRow({title:'Bank'}),
-			Titanium.UI.createPickerRow({title:'Web'}),
-			Titanium.UI.createPickerRow({title:'Social Networking'}),
-			Titanium.UI.createPickerRow({title:'Shopping'}),
-			Titanium.UI.createPickerRow({title:'Work'}),
-			Titanium.UI.createPickerRow({title:'Healthcare'}),
 			Titanium.UI.createPickerRow({title:'Computer'}),
-			Titanium.UI.createPickerRow({title:'Phone'}),
+			Titanium.UI.createPickerRow({title:'Credit Card'}),
 			Titanium.UI.createPickerRow({title:'Email'}),
-			Titanium.UI.createPickerRow({title:'Others'})
+			Titanium.UI.createPickerRow({title:'Healthcare'}),
+			Titanium.UI.createPickerRow({title:'Others'}),
+			Titanium.UI.createPickerRow({title:'Shopping'}),
+			Titanium.UI.createPickerRow({title:'Social Networking'}),
+			Titanium.UI.createPickerRow({title:'Web'}),
+			Titanium.UI.createPickerRow({title:'Work'}),
 		],
 		slide_in =  Titanium.UI.createAnimation({bottom:0}),
 		slide_out =  Titanium.UI.createAnimation({bottom:-251}),
@@ -86,28 +85,26 @@ function ComboBox(opts){
 	function getRow(){
 		switch(opts.value)
 		{
-			case "Credit Card":
-			  return 0;
 			case 'Bank':
 			  return 1;
-			case 'Web':
+			case "Credit Card":
 			  return 2;
-			case 'Social Networking':
-			  return 3;
-			case 'Shopping':
-			  return 4;
-			case 'Work':
-			  return 5;
-			case 'Healthcare':
-			  return 6;
 			case 'Computer':
-			  return 7;
-			case 'Phone':
-			  return 8;
+			  return 3;
 			case 'Email':
-			  return 9;
+			  return 4;
+			case 'Healthcare':
+			  return 5;
 			case 'Others':
-			  return 10;
+			  return 0;
+			case 'Shopping':
+			  return 6;
+			case 'Social Networking':
+			  return 7;
+			case 'Work':
+			  return 8;
+			case 'Web':
+			  return 9;
 			default:
 			  return 0;
 		}
