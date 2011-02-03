@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-<id>com.opolyakov.PasswordStore</id>
-<name>PasswordStore</name>
-<version>1.0</version>
-<publisher>olegp</publisher>
-<url>opolyakov.com</url>
-<description>No description provided</description>
-<copyright>2011 by olegp</copyright>
-<icon>appicon.png</icon>
+    <id>com.opolyakov</id>
+    <name>PassStore</name>
+    <version>1.0</version>
+    <publisher>not specified</publisher>
+    <url>not specified</url>
+    <description>not specified</description>
+    <copyright>not specified</copyright>
+    <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
     <statusbar-style>default</statusbar-style>
@@ -15,7 +15,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-<guid>005ac489-8354-4a30-84a4-d7a4bf4b120a</guid>
+<guid>77354c08-3343-4c81-a173-9d2333280a2e</guid>
 	<iphone>
 		<orientations device="iphone">
 			<orientation>Ti.UI.PORTRAIT</orientation>

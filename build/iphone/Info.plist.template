@@ -22,7 +22,7 @@
 			<string>com.opolyakov</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>passwordstore</string>
+				<string>passstore</string>
 			</array>
 		</dict>
 	</array>
